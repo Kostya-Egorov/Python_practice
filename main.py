@@ -1,23 +1,17 @@
 try:
-    print("# Сложение")
     firstNumber = int(input("Введите первое число: "))
     secondNumber = int(input("Введите второе число: "))
-    print("Результат сложения: ", firstNumber + secondNumber, '\n')
-
-    print("# Вычитание")
-    firstNumber = int(input("Введите первое число: "))
-    secondNumber = int(input("Введите второе число: "))
-    print("Результат вычитания: ", firstNumber - secondNumber, '\n')
-
-    print("# Умножение")
-    firstNumber = int(input("Введите первое число: "))
-    secondNumber = int(input("Введите второе число: "))
-    print("Результат умножения: ", firstNumber * secondNumber, '\n')
-
-    print("# Деление")
-    firstNumber = int(input("Введите первое число: "))
-    secondNumber = int(input("Введите второе число: "))
-    print("Результат деления: ", firstNumber / secondNumber, '\n')
+    operand = input("Введите операцию (+, -, *, /): ")
+    if operand == "+":
+        print("Результат сложения: ", firstNumber + secondNumber, '\n')
+    elif operand == "-":
+        print("Результат вычитания: ", firstNumber - secondNumber, '\n')
+    elif operand == "*":
+        print("Результат умножения: ", firstNumber * secondNumber, '\n')
+    elif operand == "/":
+        print("Результат деления: ", firstNumber / secondNumber, '\n')
+    else:
+        print("Неправильная операция!")
 except ValueError:
     print("Введите число!")
 except ZeroDivisionError:
