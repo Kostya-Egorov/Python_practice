@@ -5,5 +5,4 @@ def countdown(number):
     return "Готово"
 
 
-print(countdown(5))
-print(countdown(-5))
+print(countdown(int(input("Введите число для обратного отсчета: "))))
