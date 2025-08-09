@@ -1,9 +1,12 @@
-def text_analysis(text):
-    punctuation = [",", ".", "!", "?", ":", ";", "'"]
-    words = "".join(l for l in text if l not in punctuation).split()
+def text_len(words):
     print(f"Количество слов в тексте: {len(words)}")
+
+
+def most_large(words):
     print(f"Самое длинное слово в тексте: {max(words, key=len)}")
 
+
+def vowels_count(words):
     count_vowels = 0
     vowel = ["а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"]
     for word in words:
@@ -12,6 +15,8 @@ def text_analysis(text):
                 count_vowels += 1
     print(f"Количество гласных в тексте: {count_vowels}")
 
+
+def repeat_words(words):
     words_counts = []
     count = 0
     for word in words:
@@ -24,5 +29,9 @@ def text_analysis(text):
         print(f"{words[i]}: {words_counts[i]}")
 
 
-text_analysis(input("Введите текст: "))
-
+punctuation = [",", ".", "!", "?", ":", ";", "'"]
+words = "".join(l for l in input("Введите текст: ") if l not in punctuation).split()
+text_len(words)
+most_large(words)
+vowels_count(words)
+repeat_words(words)
