@@ -24,4 +24,5 @@ def text_analysis(text):
         print(f"{words[i]}: {words_counts[i]}")
 
 
-text_analysis("Дайте уже этому французу булочек! булочек")
+text_analysis(input("Введите текст: "))
+
