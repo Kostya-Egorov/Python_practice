@@ -10,7 +10,7 @@ def calculate_average(grades):
     average_grade = 0
     for grade in grades:
         average_grade += grade
-    return average_grade / len(grades)
+    return round(average_grade / len(grades), 2)
 
 
 def info():
