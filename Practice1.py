@@ -2,6 +2,13 @@ def calculate_average(grades):
     return round(sum(grades) / len(grades), 2)
 
 
+def calculate_average_all(students):
+    average_grade = 0
+    for student in students:
+        average_grade += calculate_average(student['grades'])
+    return round(average_grade / len(students), 2)
+
+
 def info(students):
     for student in students:
         status = "Отстающий"
@@ -9,6 +16,7 @@ def info(students):
         print(f"Студент: {student['name']} \n"
               f"Средний балл: {calculate_average(student['grades'])} \n"
               f"Статус: {status} \n")
+    print(f"Средний балл всех студентов: {calculate_average_all(students)}\n")
 
 
 def add_student(students, name, grades):
@@ -18,7 +26,7 @@ def add_student(students, name, grades):
             break
     try:
         students.append({'name': name, 'grades': grades})
-        print("Студент успешно добавлен.")
+        print(f"Студент {name} успешно добавлен.")
         info(students)
     except TypeError:
         print(f"У {name} нет оценок.")
@@ -30,8 +38,8 @@ def remove_student(students, name):
             continue
         else:
             students.remove(student)
-            print("Студент успешно удален.")
-            break
+            print(f"Студент {name} успешно удален.")
+            return
     print("Такого студента не существует.")
 
 
@@ -42,4 +50,6 @@ students = [
     {'name': 'Draco', 'grades': [88, 67, 65]}
 ]
 
-add_student(students, "Snake", None)
+add_student(students, "Snake", [99, 99, 100])
+remove_student(students, "Ron")
+info(students)
