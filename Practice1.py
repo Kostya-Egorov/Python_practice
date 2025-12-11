@@ -9,6 +9,16 @@ def calculate_average_all(students):
     return round(average_grade / len(students), 2)
 
 
+def lowest_grade(students):
+    lowest_student = students[0]
+    lowest_grade = calculate_average(students[0]['grades'])
+    for student in students:
+        if calculate_average(student['grades']) < lowest_grade:
+            lowest_grade = calculate_average(student['grades'])
+            lowest_student = student
+    return lowest_student
+
+
 def info(students):
     for student in students:
         status = "Отстающий"
@@ -17,6 +27,7 @@ def info(students):
               f"Средний балл: {calculate_average(student['grades'])} \n"
               f"Статус: {status} \n")
     print(f"Средний балл всех студентов: {calculate_average_all(students)}\n")
+    print(f"Самый отстающий: {lowest_grade(students)['name']}\n")
 
 
 def add_student(students, name, grades):
@@ -39,6 +50,7 @@ def remove_student(students, name):
         else:
             students.remove(student)
             print(f"Студент {name} успешно удален.")
+            info(students)
             return
     print("Такого студента не существует.")
 
@@ -51,5 +63,4 @@ students = [
 ]
 
 add_student(students, "Snake", [99, 99, 100])
-remove_student(students, "Ron")
-info(students)
+remove_student(students, lowest_grade(students)['name'])
