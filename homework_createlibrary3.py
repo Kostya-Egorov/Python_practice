@@ -8,7 +8,8 @@ def add_book(title, author, year):
         print("Книга с таким названием уже существует, хотите обновить информацию о ней?")
         if input() != "Да":
             return None
-        else: library[title] = {'Автор': author, 'Год издания': year, "Наличие": None}
+        else:
+            library[title] = {'Автор': author, 'Год издания': year, "Наличие": None}
         return print("Информация о книге обновлена")
     library[title] = {'Автор': author, 'Год издания': year, "Наличие": None}
     return print("Информация о книге добавлена")
@@ -17,7 +18,7 @@ def add_book(title, author, year):
 def remove_book(title):
     if title in library:
         del library[title]
-        print("Книга успешно удалена")
+        print(f"Книга '{title}' успешно удалена")
     else:
         print("Такой книги нет в библиотеке")
 
