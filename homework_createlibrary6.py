@@ -4,7 +4,10 @@ def book_list_view(lib):
         print(name)
 
 
-def add_book(title, author, year, lib):
+def add_book(lib):
+    title = input("Введите имя книги: ")
+    author = input("Введите автора книги: ")
+    year = int(input("Введите дату выпуска книги: "))
     if title in lib:
         if input("Книга с таким названием уже существует, хотите обновить информацию о ней? ").lower().strip() == "да":
             lib[title] = {'Автор': author, 'Год издания': year, "Наличие": None}
@@ -13,7 +16,8 @@ def add_book(title, author, year, lib):
     return "Информация о книге добавлена"
 
 
-def remove_book(title, lib):
+def remove_book(lib):
+    title = input("Введите название книги: ")
     if title in lib:
         del lib[title]
         print(f"Книга '{title}' успешно удалена")
@@ -21,21 +25,24 @@ def remove_book(title, lib):
         print("Такой книги нет в библиотеке")
 
 
-def issue_book(title, lib):
+def issue_book(lib):
+    title = input("Введите название книги: ")
     if lib[title]["Наличие"] == "Нет в наличии":
         print("Книги нет в библиотеке")
     else:
         lib[title]["Наличие"] = "Нет в наличии"
 
 
-def return_book(title, lib):
+def return_book(lib):
+    title = input("Введите название книги: ")
     if lib[title]["Наличие"] == "В наличии":
         print("Книга уже в библиотеке")
     else:
         lib[title]["Наличие"] = "В наличии"
 
 
-def find_book(title, lib):
+def find_book(lib):
+    title = input("Введите название книги: ")
     if title in lib:
         if lib[title]['Наличие'] == "В наличии":
             book_access = "Книга доступна"
@@ -43,9 +50,9 @@ def find_book(title, lib):
             book_access = "Книга выдана"
         else:
             book_access = "Книга в библиотеке, но ее статус не определен"
-        return f"{title} - {lib[title]['Автор']}, {lib[title]['Год издания']}, {book_access}"
+        print(f"{title} - {lib[title]['Автор']}, {lib[title]['Год издания']}, {book_access}")
     else:
-        return "Такой книги не существует"
+        print("Такой книги не существует")
 
 
 library = {
@@ -65,34 +72,22 @@ library = {
         "Наличие": "В наличии"}
 }
 
-menu = {1: ["Список книг", book_list_view],
-        2: ["Добавить книгу", add_book],
-        3: ["Удалить книгу", remove_book],
-        4: ["Информация о книге", find_book],
-        5: ["Отдать книгу", issue_book],
-        6: ["Вернуть книгу", return_book]}
+menu = {1: {"Название": "Список книг", "Функция": book_list_view},
+        2: {"Название": "Добавить книгу", "Функция": add_book},
+        3: {"Название": "Удалить книгу", "Функция": remove_book},
+        4: {"Название": "Информация о книге", "Функция": find_book},
+        5: {"Название": "Отдать книгу", "Функция": issue_book},
+        6: {"Название": "Вернуть книгу", "Функция": return_book},
+        0: {"Название": "Выход"}}
 
 while True:
     try:
         for i in menu:
-            print(f"{i} - {menu[i][0]}")
+            print(f"{i} - {menu[i]["Название"]}")
         action = int(input("Выберите действие: "))
-        if action == 1:
-            menu[action][1](library)
-        elif action == 2:
-            menu[action][1](input("Введите имя книги: "),
-                            input("Введите автора книги: "), int(input("Введите дату выпуска книги: ")), library)
-        elif action == 3:
-            menu[action][1](input("Введите название книги: "), library)
-        elif action == 4:
-            print(menu[action][1](input("Введите название книги: "), library))
-        elif action == 5:
-            menu[action][1](input("Введите название книги: "), library)
-        elif action == 6:
-            menu[action][1](input("Введите название книги: "), library)
-        elif action == 0:
+        if action == 0:
             break
         else:
-            print("Неверное действие.")
+            menu[action]["Функция"](library)
     except ValueError:
         print("Неверный тип данных.")
