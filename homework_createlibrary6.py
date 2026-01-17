@@ -65,24 +65,31 @@ library = {
         "Наличие": "В наличии"}
 }
 
+menu = {1: ["Список книг", book_list_view],
+        2: ["Добавить книгу", add_book],
+        3: ["Удалить книгу", remove_book],
+        4: ["Информация о книге", find_book],
+        5: ["Отдать книгу", issue_book],
+        6: ["Вернуть книгу", return_book]}
+
 while True:
     try:
-        action = int(
-            input("Выберите действие: \n1 - Список книг\n2 - Добавить книгу\n3 - Удалить книгу\n4 - Информация о книге\n"
-                  "5 - Отдать книгу\n6 - Вернуть книгу\n0 - Выход\n"))
+        for i in menu:
+            print(f"{i} - {menu[i][0]}")
+        action = int(input("Выберите действие: "))
         if action == 1:
-            book_list_view(library)
+            menu[action][1](library)
         elif action == 2:
-            add_book(input("Введите имя книги: "),
-                     input("Введите автора книги: "), int(input("Введите дату выпуска книги: ")), library)
+            menu[action][1](input("Введите имя книги: "),
+                            input("Введите автора книги: "), int(input("Введите дату выпуска книги: ")), library)
         elif action == 3:
-            remove_book(input("Введите название книги: "), library)
+            menu[action][1](input("Введите название книги: "), library)
         elif action == 4:
-            print(find_book(input("Введите название книги: "), library))
+            print(menu[action][1](input("Введите название книги: "), library))
         elif action == 5:
-            issue_book(input("Введите название книги: "), library)
+            menu[action][1](input("Введите название книги: "), library)
         elif action == 6:
-            return_book(input("Введите название книги: "), library)
+            menu[action][1](input("Введите название книги: "), library)
         elif action == 0:
             break
         else:
