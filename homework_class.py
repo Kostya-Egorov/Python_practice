@@ -10,6 +10,9 @@ class ToDoList:
     def remove_task(self, task):
         del self.task[task]
         print("Задача удалена")
+        keys = list(self.task.keys())
+        for i in range(len(self.task)):  # Переименовываю ключи в правильном порядке
+            self.task[i + 1] = self.task.pop(keys[i])
 
     def list_tasks(self):
         if len(self.task) != 0:
@@ -26,7 +29,7 @@ class ToDoList:
 tasks = ToDoList()
 menu = {1: {"Название": "Список задач", "Функция": tasks.list_tasks},
         2: {"Название": "Добавить задачу", "Функция": tasks.add_task},
-        3: {"Название": "Удалить книгу", "Функция": tasks.remove_task},
+        3: {"Название": "Удалить задачу", "Функция": tasks.remove_task},
         4: {"Название": "Выполнить задачу", "Функция": tasks.complete_task},
         0: {"Название": "Выход"}}
 try:
