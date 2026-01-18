@@ -8,11 +8,14 @@ class ToDoList:
         self.task[len(self.task)]["Состояние"] = "Не выполнено"
 
     def remove_task(self, task):
-        del self.task[task]
-        print("Задача удалена")
-        keys = list(self.task.keys())
-        for i in range(len(self.task)):  # Переименовываю ключи в правильном порядке
-            self.task[i + 1] = self.task.pop(keys[i])
+        if task not in self.task.keys():
+            print("Несуществующая задача")
+        else:
+            del self.task[task]
+            print("Задача удалена")
+            keys = list(self.task.keys())
+            for i in range(len(self.task)):  # Переименовываю ключи в правильном порядке
+                self.task[i + 1] = self.task.pop(keys[i])
 
     def list_tasks(self):
         if len(self.task) != 0:
@@ -22,8 +25,11 @@ class ToDoList:
             print("Задач нет")
 
     def complete_task(self, task):
-        self.task[task]["Состояние"] = "Выполнено"
-        print("Задача выполнена")
+        if task not in self.task.keys():
+            print("Несуществующая задача")
+        else:
+            self.task[task]["Состояние"] = "Выполнено"
+            print("Задача выполнена")
 
 
 tasks = ToDoList()
