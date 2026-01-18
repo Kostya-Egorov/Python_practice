@@ -27,24 +27,20 @@ class ToDoList:
 
 
 tasks = ToDoList()
-menu = {1: {"Название": "Список задач", "Функция": tasks.list_tasks},
-        2: {"Название": "Добавить задачу", "Функция": tasks.add_task},
-        3: {"Название": "Удалить задачу", "Функция": tasks.remove_task},
-        4: {"Название": "Выполнить задачу", "Функция": tasks.complete_task},
+menu = {1: {"Название": "Список задач", "Функция": lambda x: tasks.list_tasks()},
+        2: {"Название": "Добавить задачу", "Функция": lambda x: tasks.add_task(input("Введите задачу: "))},
+        3: {"Название": "Удалить задачу", "Функция": lambda x: tasks.remove_task(int(input("Введите № задачи: ")))},
+        4: {"Название": "Выполнить задачу", "Функция": lambda x: tasks.complete_task(int(input("Введите № задачи: ")))},
         0: {"Название": "Выход"}}
-try:
-    while True:
+while True:
+    try:
         print("")  # Для лучшей читаемости в консоли
         for i in menu:
             print(f"{i} - {menu[i]["Название"]}")
         action = int(input("Выберите действие: "))
         if action == 0:
             break
-        elif action == 1:
-            menu[action]["Функция"]()
-        elif action == 2:
-            menu[action]["Функция"](input("Введите задачу: "))
-        elif action == 3 or action == 4:
-            menu[action]["Функция"](int(input("Введите № задачи: ")))
-except ValueError:
-    print("Неверный тип данных.")
+        else:
+            menu[action]["Функция"](1)
+    except ValueError:
+        print("Неверный тип данных.")
